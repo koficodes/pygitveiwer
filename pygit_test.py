@@ -1,9 +1,7 @@
-from pygit2 import Repository, discover_repository
+from pygit2 import Repository, discover_repository, GitError
 import os
 
 path = '/home/paul/dashboard_repo/'
-
-# print(repo.head.shorthand)
 
 
 def list_dir_repositories(path):
@@ -13,4 +11,13 @@ def list_dir_repositories(path):
     return [repo for repo in repositories if repo is not None]
 
 
-print(list_dir_repositories(path))
+def get_current_branch_name(repo_path):
+    repo = Repository(repo_path.rstrip('/'))
+    try:
+        return repo.head.shorthand
+    except GitError:
+        return "Not Found"
+
+
+print({get_current_branch_name(repo_path): repo_path
+       for repo_path in list_dir_repositories(path)})
