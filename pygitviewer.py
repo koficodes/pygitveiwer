@@ -1,6 +1,7 @@
 import os
 from pygit2 import Repository, discover_repository, GitError
 import click
+import tablib
 
 
 def list_dir_repositories(path):
@@ -23,8 +24,12 @@ def get_current_branch_name(repo_path):
 @click.argument('path', default='.', metavar='The directory path of git repositories')
 def display_git_branches(path):
     if os.path.exists(path) and os.path.isdir(path):
-        print({get_current_branch_name(repo_path): repo_path
-               for repo_path in list_dir_repositories(path)})
+        data = tablib.Dataset()
+        data.headers = ['Branch Name', 'Repo Location']
+
+        for repo_path in list_dir_repositories(path):
+            data.append([get_current_branch_name(repo_path), repo_path])
+        print(data)
 
 
 if __name__ == "__main__":

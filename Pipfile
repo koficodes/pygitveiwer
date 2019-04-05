@@ -9,6 +9,7 @@ autopep8 = "*"
 
 [packages]
 click = "*"
+tablib = "*"
 
 [requires]
 python_version = "3.6"
