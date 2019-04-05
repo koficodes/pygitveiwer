@@ -2,6 +2,7 @@ import os
 from pygit2 import Repository, discover_repository, GitError
 import click
 import tablib
+from colorama import init, Fore
 
 
 def list_dir_repositories(path):
@@ -29,7 +30,9 @@ def display_git_branches(path):
 
         for repo_path in list_dir_repositories(path):
             data.append([get_current_branch_name(repo_path), repo_path])
-        print('\n{} Repositories Found \n'.format(len(data)))
+        init()
+        print(Fore.GREEN)
+        print('\n{} Repositories Found. \n'.format(len(data)))
         print(data)
 
 
