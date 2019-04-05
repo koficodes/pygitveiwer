@@ -25,10 +25,11 @@ def get_current_branch_name(repo_path):
 def display_git_branches(path):
     if os.path.exists(path) and os.path.isdir(path):
         data = tablib.Dataset()
-        data.headers = ['Branch Name', 'Repo Location']
+        data.headers = ['Branch Name', 'Repository Path']
 
         for repo_path in list_dir_repositories(path):
             data.append([get_current_branch_name(repo_path), repo_path])
+        print('\n{} Repositories Found \n'.format(len(data)))
         print(data)
 
 
