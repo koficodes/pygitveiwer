@@ -1,7 +1,6 @@
-from pygit2 import Repository, discover_repository, GitError
 import os
-
-path = '/home/paul/dashboard_repo/'
+from pygit2 import Repository, discover_repository, GitError
+import click
 
 
 def list_dir_repositories(path):
@@ -19,5 +18,6 @@ def get_current_branch_name(repo_path):
         return "Not Found"
 
 
-print({get_current_branch_name(repo_path): repo_path
-       for repo_path in list_dir_repositories(path)})
+if __name__ == "__main__":
+    print({get_current_branch_name(repo_path): repo_path
+           for repo_path in list_dir_repositories(path)})
