@@ -18,6 +18,12 @@ def get_current_branch_name(repo_path):
         return "Not Found"
 
 
-if __name__ == "__main__":
+@click.command()
+@click.argument('path', default='.', metavar='The directory path of git repositories')
+def display_git_branches(path):
     print({get_current_branch_name(repo_path): repo_path
            for repo_path in list_dir_repositories(path)})
+
+
+if __name__ == "__main__":
+    display_git_branches()
